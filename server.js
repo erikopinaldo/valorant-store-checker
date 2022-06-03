@@ -79,6 +79,7 @@ const server = http.createServer((req, res) => {
             console.dir(err);
             return;
         }
+        console.log(page)
         res.write(data);
         res.end();
       });
