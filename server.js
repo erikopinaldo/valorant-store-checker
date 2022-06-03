@@ -11,7 +11,7 @@ const riotUser = process.env.RIOT_USER;
 const riotPass = process.env.RIOT_PASS;
 
 //import server modules
-const express = requires('express');
+const express = require('express');
 const app = express();
 const http = require('http');
 const fs = require('fs')
