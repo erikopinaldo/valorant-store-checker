@@ -27,7 +27,7 @@
         <ul class="skins">
         <% for(var i = 0; i < result.length; i++) {%>
             <li class="itemContainer">
-                <img id="skinImage1" src=''>
+                <img src=<%= result[i].displayIcon %>>
                 <h2><%= result[i].displayName %></h2>
             </li>
             <% } %>
