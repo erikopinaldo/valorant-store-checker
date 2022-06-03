@@ -56,6 +56,7 @@ app.get('/api/result', (req, res) => {
         const itemJson = {
           result: response
         }
+        console.log(itemJson)
         res.render('index.ejs', itemJson);
       })
     })

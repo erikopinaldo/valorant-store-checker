@@ -22,25 +22,35 @@
           </div>
           <button id="clickMe" type="button" name="button">Click Me</button>
         </div>
-        <%= result %>
-        <div class="skins">
-          <div class="itemContainer">
-            <img id="skinImage1" src="">
-            <h2 id="skin1"></h2>
-          </div>
-          <div class="itemContainer">
-            <img id="skinImage2" src="">
-            <h2 id="skin2"></h2>
-          </div>          
-          <div class="itemContainer">
-            <img id="skinImage3" src="">
-            <h2 id="skin3"></h2>
-          </div>
-          <div class="itemContainer">
-            <img id="skinImage4" src="">
-            <h2 id="skin4"></h2>
-          </div>
-        </div>
+
+        <!-- Loop through skins -->
+        <ul class="skins">
+        <% for(var i = 0; i < result.length; i++) {%>
+            <li class="itemContainer">
+                <img id="skinImage1" src=''>
+                <h2><%= result[i].displayName %></h2>
+            </li>
+            <% } %>
+        </ul>
+
+        <!-- <div class="skins">
+            <div class="itemContainer">
+                <img id="skinImage1" src="">
+                <h2 id="skin1"></h2>
+            </div>
+            <div class="itemContainer">
+                <img id="skinImage2" src="">
+                <h2 id="skin2"></h2>
+            </div>          
+            <div class="itemContainer">
+                <img id="skinImage3" src="">
+                <h2 id="skin3"></h2>
+            </div>
+            <div class="itemContainer">
+                <img id="skinImage4" src="">
+                <h2 id="skin4"></h2>
+            </div>
+        </div> -->
       </div>
     </div>
     <script type="text/javascript" src="/js/main.js"></script>
