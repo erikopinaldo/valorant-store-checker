@@ -13,10 +13,6 @@ const riotPass = process.env.RIOT_PASS;
 //import server modules
 const express = require('express');
 const app = express();
-const http = require('http');
-const fs = require('fs')
-const url = require('url');
-const querystring = require('querystring');
 const figlet = require('figlet')
 
 // Set rendering engine
