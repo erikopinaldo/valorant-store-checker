@@ -44,7 +44,7 @@ const server = http.createServer((req, res) => {
               const contents = await content.getWeaponSkinLevelByUuid(
                   skin
               );
-              skinArr.push(contents.displayName)
+              skinArr.push(contents)
             }
             // log item
             console.log(skinArr)

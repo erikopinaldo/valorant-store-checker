@@ -40,3 +40,43 @@ footer {
 /******************************************
 /* ADDITIONAL STYLES
 /*******************************************/
+
+.wrapper {
+     height: 100vh;
+     display: flex;
+     justify-content: center;
+     align-items: center;
+}
+
+.content {
+     height: 500px;
+}
+
+.skins {
+     height: 400px;
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+}
+
+.skins > * {
+     /* border: 5px solid black; */
+}
+
+.itemContainer {
+     flex-direction: column;
+     margin-right: 20px;
+     margin-left: 20px;
+}
+
+img {
+     max-height: 100px;
+}
+
+h1 {
+     text-align: center;
+}
+
+.hidden {
+     display: none;
+}
