@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@liamcottle/valorant.js": "^1.4.0",
+    "dotenv": "^16.0.1",
+    "figlet": "^1.5.2"
+  }
+}
