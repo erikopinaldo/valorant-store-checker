@@ -3,12 +3,16 @@
 // Config
 require('dotenv').config();
 
-// import modules
+// import valorant modules
 const { API, ContentAPI, Languages, Regions } = require("@liamcottle/valorant.js");
 const Valorant = require('@liamcottle/valorant.js');
 const valorantApi = new Valorant.API('NA');
 const riotUser = process.env.RIOT_USER;
 const riotPass = process.env.RIOT_PASS;
+
+//import server modules
+const express = requires('express');
+const app = express();
 const http = require('http');
 const fs = require('fs')
 const url = require('url');
