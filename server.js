@@ -14,10 +14,10 @@ const riotPass = process.env.RIOT_PASS;
 const express = require('express');
 const app = express();
 
-// Set template engine to ejs
+// Set template engine to ejs. This is done so that the server can server ejs files to be rendered by the client
 app.set('view engine', 'ejs')
 
-// Serve static files in the public directory
+// Serve static files like style.css and main.js in the public directory
 app.use(express.static('public'))
 
 // Page routing
