@@ -3,26 +3,24 @@
 // Config
 require('dotenv').config();
 
-// import valorant modules
+// Import valorant modules
 const { API, ContentAPI, Languages, Regions } = require("@liamcottle/valorant.js");
 const Valorant = require('@liamcottle/valorant.js');
 const valorantApi = new Valorant.API('NA');
 const riotUser = process.env.RIOT_USER;
 const riotPass = process.env.RIOT_PASS;
 
-//import server modules
+// Import express modules
 const express = require('express');
 const app = express();
-const figlet = require('figlet')
 
-// Set rendering engine
+// Set template engine to ejs
 app.set('view engine', 'ejs')
+
+// Serve static files in the public directory
 app.use(express.static('public'))
 
-app.listen(8000, () => {
-  console.log('listening on 8000')
-})
-
+// Page routing
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html')
 })
@@ -38,15 +36,13 @@ app.get('/api/result', (req, res) => {
     .then(async (response) => {
       const skins = response.data.SkinsPanelLayout.SingleItemOffers
       let skinArr = []
-      for (skin of skins) {
-      // get assets for the first Skin in the Store
-        const contents = await content.getWeaponSkinLevelByUuid(
-            skin
-        );
+      
+      for (skin of skins) { 
+        // get assets for the first Skin in the Store
+        const contents = await content.getWeaponSkinLevelByUuid(skin);
         skinArr.push(contents)
       }
-      // log item
-      console.log(skinArr)
+
       return skinArr
     })
     .then(response => {
@@ -70,3 +66,7 @@ app.get('/api/result', (req, res) => {
 app.all('*', (req, res) => {
   res.status(404).send('<h1>404! Page not found</h1>');
 });
+
+app.listen(8000, () => {
+  console.log('listening on 8000')
+})
