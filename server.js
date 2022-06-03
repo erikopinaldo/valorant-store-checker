@@ -3,26 +3,24 @@
 // Config
 require('dotenv').config();
 
-// import valorant modules
+// Import valorant modules
 const { API, ContentAPI, Languages, Regions } = require("@liamcottle/valorant.js");
 const Valorant = require('@liamcottle/valorant.js');
 const valorantApi = new Valorant.API('NA');
 const riotUser = process.env.RIOT_USER;
 const riotPass = process.env.RIOT_PASS;
 
-//import server modules
+// Import express modules
 const express = require('express');
 const app = express();
-const figlet = require('figlet')
 
-// Set rendering engine
+// Set template engine to ejs. This is done so that the server can server ejs files to be rendered by the client
 app.set('view engine', 'ejs')
+
+// Serve static files like style.css and main.js in the public directory
 app.use(express.static('public'))
 
-app.listen(8000, () => {
-  console.log('listening on 8000')
-})
-
+// Page routing
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html')
 })
@@ -36,24 +34,30 @@ app.get('/api/result', (req, res) => {
   .then(() => {
     client.getPlayerStoreFront(client.user_id)
     .then(async (response) => {
+      
+      // Get an array of storefront items
       const skins = response.data.SkinsPanelLayout.SingleItemOffers
+      
+      // Empty array to catch individual skin data
       let skinArr = []
-      for (skin of skins) {
-      // get assets for the first Skin in the Store
-        const contents = await content.getWeaponSkinLevelByUuid(
-            skin
-        );
+      
+      // Loop through array of storefront items, grab skin content, and push to new array
+      for (skin of skins) { 
+        const contents = await content.getWeaponSkinLevelByUuid(skin);
         skinArr.push(contents)
       }
-      // log item
-      console.log(skinArr)
+
       return skinArr
     })
     .then(response => {
       const itemJson = {
         result: response
       }
+      
+      // Log response to client before it is sent
       console.log(itemJson)
+
+      // Second argument, itemJson, is now an accessible variable by index.ejs
       res.render('index.ejs', itemJson);
     })
   })
@@ -70,3 +74,7 @@ app.get('/api/result', (req, res) => {
 app.all('*', (req, res) => {
   res.status(404).send('<h1>404! Page not found</h1>');
 });
+
+app.listen(8000, () => {
+  console.log('listening on 8000')
+})
