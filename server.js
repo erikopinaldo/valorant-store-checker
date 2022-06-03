@@ -30,6 +30,40 @@ app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index.html')
 })
 
+app.get('/api/result', (req, res) => {
+  const client = new API(Regions.NorthAmerica);
+  const content = new ContentAPI(Languages.English);
+  
+    // authorize using the ClientAPI
+    client.authorize(riotUser, riotPass)
+    .then(() => {
+      client.getPlayerStoreFront(client.user_id)
+      .then(async (response) => {
+        const skins = response.data.SkinsPanelLayout.SingleItemOffers
+        let skinArr = []
+        for (skin of skins) {
+        // get assets for the first Skin in the Store
+          const contents = await content.getWeaponSkinLevelByUuid(
+              skin
+          );
+          skinArr.push(contents)
+        }
+        // log item
+        console.log(skinArr)
+        return skinArr
+      })
+      .then(response => {
+        const itemJson = {
+          result: response
+        }
+        res.render('index.ejs', itemJson);
+      })
+    })
+    .catch((error) => {
+          console.log(error);
+    }) 
+})
+
 // const server = http.createServer((req, res) => {
 //     const page = url.parse(req.url).pathname;
 //     console.log(page);
