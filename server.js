@@ -19,6 +19,9 @@ const url = require('url');
 const querystring = require('querystring');
 const figlet = require('figlet')
 
+// Set rendering engine
+app.set('view engine', 'ejs')
+
 app.listen(8000, () => {
   console.log('listening on 8000')
 })
