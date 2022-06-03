@@ -34,11 +34,15 @@ app.get('/api/result', (req, res) => {
   .then(() => {
     client.getPlayerStoreFront(client.user_id)
     .then(async (response) => {
+      
+      // Get an array of storefront items
       const skins = response.data.SkinsPanelLayout.SingleItemOffers
+      
+      // Empty array to catch individual skin data
       let skinArr = []
       
+      // Loop through array of storefront items, grab skin content, and push to new array
       for (skin of skins) { 
-        // get assets for the first Skin in the Store
         const contents = await content.getWeaponSkinLevelByUuid(skin);
         skinArr.push(contents)
       }
@@ -49,7 +53,11 @@ app.get('/api/result', (req, res) => {
       const itemJson = {
         result: response
       }
+      
+      // Log response to client before it is sent
       console.log(itemJson)
+
+      // Second argument, itemJson, is now an accessible variable by index.ejs
       res.render('index.ejs', itemJson);
     })
   })
