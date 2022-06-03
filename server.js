@@ -31,35 +31,35 @@ app.get('/api/result', (req, res) => {
   const client = new API(Regions.NorthAmerica);
   const content = new ContentAPI(Languages.English);
   
-    // authorize using the ClientAPI
-    client.authorize(riotUser, riotPass)
-    .then(() => {
-      client.getPlayerStoreFront(client.user_id)
-      .then(async (response) => {
-        const skins = response.data.SkinsPanelLayout.SingleItemOffers
-        let skinArr = []
-        for (skin of skins) {
-        // get assets for the first Skin in the Store
-          const contents = await content.getWeaponSkinLevelByUuid(
-              skin
-          );
-          skinArr.push(contents)
-        }
-        // log item
-        console.log(skinArr)
-        return skinArr
-      })
-      .then(response => {
-        const itemJson = {
-          result: response
-        }
-        console.log(itemJson)
-        res.render('index.ejs', itemJson);
-      })
+  // authorize using the ClientAPI
+  client.authorize(riotUser, riotPass)
+  .then(() => {
+    client.getPlayerStoreFront(client.user_id)
+    .then(async (response) => {
+      const skins = response.data.SkinsPanelLayout.SingleItemOffers
+      let skinArr = []
+      for (skin of skins) {
+      // get assets for the first Skin in the Store
+        const contents = await content.getWeaponSkinLevelByUuid(
+            skin
+        );
+        skinArr.push(contents)
+      }
+      // log item
+      console.log(skinArr)
+      return skinArr
     })
-    .catch((error) => {
-          console.log(error);
-    }) 
+    .then(response => {
+      const itemJson = {
+        result: response
+      }
+      console.log(itemJson)
+      res.render('index.ejs', itemJson);
+    })
+  })
+  .catch((error) => {
+        console.log(error);
+  }) 
 })
 
 // This route will handle all the requests that are 
