@@ -68,6 +68,7 @@ app.get('/api/result', (req, res) => {
   })
   .catch((error) => {
         console.log(error);
+        res.sendFile(__dirname + '/error.html')
   }) 
 })
 
