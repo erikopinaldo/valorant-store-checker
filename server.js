@@ -1,7 +1,7 @@
 // https://github.com/liamcottle/valorant.js
 
-// Config
-require('dotenv').config();
+// // Config
+// require('dotenv').config();
 
 const PORT = 8000
 
