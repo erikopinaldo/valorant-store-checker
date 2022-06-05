@@ -3,6 +3,8 @@
 // Config
 require('dotenv').config();
 
+const PORT = 8000
+
 // Import valorant modules
 const { API, ContentAPI, Languages, Regions } = require("@liamcottle/valorant.js");
 const Valorant = require('@liamcottle/valorant.js');
@@ -75,6 +77,6 @@ app.all('*', (req, res) => {
   res.status(404).send('<h1>404! Page not found</h1>');
 });
 
-app.listen(8000, () => {
+app.listen(process.env.PORT || PORT, () => {
   console.log('listening on 8000')
 })
