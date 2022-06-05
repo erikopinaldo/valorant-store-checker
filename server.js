@@ -3,6 +3,9 @@
 // // Config
 // require('dotenv').config();
 
+const cors - require('cors')
+app.use(cors())
+
 const PORT = 8000
 
 // Import valorant modules
