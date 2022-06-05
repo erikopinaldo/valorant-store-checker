@@ -1,7 +1,10 @@
 // https://github.com/liamcottle/valorant.js
 
-// Config
-require('dotenv').config();
+// // Config
+// require('dotenv').config();
+
+// const cors = require('cors')
+// app.use(cors())
 
 const PORT = 8000
 
@@ -65,6 +68,7 @@ app.get('/api/result', (req, res) => {
   })
   .catch((error) => {
         console.log(error);
+        res.sendFile(__dirname + '/error.html')
   }) 
 })
 
